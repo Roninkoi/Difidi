@@ -1,0 +1,233 @@
+\documentclass[10pt]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[finnish, english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{float}
+\usepackage{authblk}
+\usepackage{comment}
+\usepackage{braket}
+\usepackage[formats]{listings}
+\usepackage{tikz}
+\usepackage{bm}
+
+\usepackage{/home/rak/Dropbox/Dev/rakmacros/rakmacros}
+
+% \usepackage[sorting=nyt, style=apa, backend=biber]{biblatex}
+% \addbibresource{.bib}
+% \setlength\bibitemsep{1.5\itemsep}
+\usepackage[top=52pt, bottom=2cm, left=2cm, right=2cm]{geometry}
+% \pagestyle{plain}
+\pagestyle{fancy}
+
+% \usepackage{academicons}
+% \newcommand{\orcid}[1]{\href{https://orcid.org/#1}{\textcolor[HTML]{A6CE39}{\aiOrcid}}}
+
+\title {
+  Self-consistent calculation of the charge and potential distribution \\ in a metal-oxide
+semiconductor diode
+}
+\date{\today}
+
+\def \firstauth{
+  Roni Koitermaa
+}
+
+\def \email{roni.koitermaa@helsinki.fi}
+
+\usepackage[pdftex,
+pdfauthor={\firstauth},
+pdftitle={\thetitle}]{hyperref}
+
+\author[1] {
+  \firstauth
+  % \orcid{0000-0001-9814-7358}
+  \thanks{\href{mailto: \email}{\email}}
+}
+
+% \affil[1] {
+% Helsinki Institute of Physics and Department of Physics, P. O. Box 43, 00014 University of
+% Helsinki, Finland
+% }
+
+\fancyhf{}
+\setlength{\headheight}{15pt}
+\lhead{\thetitle}
+\rhead{\firstauth}
+\cfoot{\thepage}
+
+\lstset{ % listing
+  basicstyle=\small\ttfamily,
+  columns=flexible,
+  breaklines=true
+}
+
+\begin{document}
+
+\setlength{\belowcaptionskip}{0pt}
+
+\selectlanguage{english}
+
+\normalsize
+
+\maketitle
+
+\begin{abstract}
+  The charge density $\rho(z)$ and potential $\phi(z)$ are numerically calculated in a metal-oxide semiconductor (MOS) diode. The Poisson equation is solved using the finite difference method (FDM) to calculate $\phi(z)$. Charge carrier concentrations are obtained from Fermi-Dirac integrals and used to calculate the charge density $\rho(z)$ in p-doped silicon. A self-consistent solution satisfying all equations is found by an iterative damping algorithm. The inversion voltage of the diode was found to be $V_I \approx 0.39 \us{V}$. The methods used were found to be viable approaches to solving $\rho(z)$ and $\phi(z)$.
+\end{abstract}
+
+% Diofidi - Diode finite differences
+
+\section{Introduction}
+
+Understanding of metal-oxide semiconductor (MOS) devices is crucial for the development of modern electronics, as it is the technology used in transistors (MOSFETs) \cite{sze}. One of the simplest MOS devices is the diode, which consists of a silicon bulk substrate, an oxide layer and a metal electrode or gate. This configuration allows current to flow easily in one direction but not in the other direction. For p-type silicon the majority charge carriers are holes, so when we have a positive voltage at the gate, a depletion layer forms. For a large positive voltage, minority negative charge carriers are attracted towards the gate and we get inversion. For a negative gate voltage, positive charge carriers are attracted towards the gate and current can't flow. These properties make the MOS structure function as a diode.
+
+The diode can be modelled as a simple stack of the three materials \cite{ass}. To calculate the charge and potential distributions, we need to solve the associated equations in this domain. The dimensionality of the problem can be reduced by using symmetry and assuming that the diode is infinitely large. This allows us to only consider the $z$ direction, where the diode has finite thickness. The metal layer can be excluded from our calculations as it is a conductor and the potential is constant. For the insulating oxide layer we have $\rho = 0$ as there are no free charge carriers, but the $\rho(z)$ in the substrate is unknown. We could calculate $\rho(z)$ using the potential $\phi(z)$, but the potential is also unknown. We have coupled differential equations for these that can be solved numerically.
+
+\section{Methods} \label{met}
+
+Our problem can be divided into two parts: solution of the Poisson equation and solution of the charge density distribution. For the former task, the finite difference method can be used \cite{che}, and for the latter we will use an iterative procedure with damping \cite{ass}.
+
+The 1D Poisson equation
+\be
+\phi''(z) = -\frac{\rho(z)}{\epsilon(z)} = f(z)
+\ee
+can be solved numerically using the finite difference method, where derivatives are approximated using Taylor series \cite{che}. There are many ways to discretize this equation, and we will use the simple three point stencil that can be written as the tridiagonal matrix \cite{lec}
+\bna
+\x A =
+\bpm
+-2 / h^2 & 1 / h^2 & 0 & \cdots & 0 \\
+1 / h^2 & \ddots &  &  & \vdots \\
+0 &  & -2 / h^2 &  & 0 \\
+\vdots &  & & \ddots & 1 / h^2 \\
+0 & \cdots & 0 & 1 / h^2 & -2 / h^2
+\epm,
+\ena
+where $h = (b - a) / (N - 1)$ is the step size for $N$ points. For the right hand side we have (using $f_i$, where $i = 0, 1, \ldots, N - 1$)
+\bna
+\vb b =
+\bpm
+f_1 - \phi(a) / h^2 \\
+f_2 \\
+\vdots \\
+f_{N-3} \\
+f_{N-2} - \phi(b) / h^2 \\
+\epm,
+\ena
+where $\phi(a)$ and $\phi(b)$ are Neumann boundary conditions for the solution domain $[a, b]$. Now we can formulate the problem as a matrix equation $\x A \vb x = \vb b$. The matrix $\x A$ is diagonally dominant, so the equation is easy to solve numerically.
+
+In order to calculate the charge carrier concentrations, we need to perform the Fermi-Dirac integrals. We can transform the integrals as (Fermi level $E_F = 0$) \cite{kim}
+\begin{align}
+n(z) = \frac{\sqrt{2} m_e^{3/2}}{\pi^2 \hbar^3} \int_{E_c(z)}^\infty \frac{\sqrt{E - E_c(z)}}{1 + \exp(E / k_B T)} \ \D E, & \mcom \eps = \frac{E - E_c(z)}{k_B T} \nonumber \\
+= \frac{\sqrt{2 k_B T} m_e^{3/2}}{\pi^2 \hbar^3} \int_0^\infty \frac{\eps^{1/2}}{1 + \exp(\eps + E_c(z) / k_B T)} \ \D \eps = \frac{\sqrt{2 k_B T} m_e^{3/2}}{\pi^2 \hbar^3} \frac{2}{\sqrt{\pi}} F_{1/2}(-E_c(z) / k_B T), \label{eq:fdn}\\
+p(z) = \frac{\sqrt{2} m_e^{3/2}}{\pi^2 \hbar^3} \int_\ninfty^{E_v(z)} \frac{\sqrt{E_v(z) - E}}{1 + \exp(E / k_B T)} \ \D E, \nonumber \\
+= \frac{\sqrt{2 k_B T} m_e^{3/2}}{\pi^2 \hbar^3} \int_0^\infty \frac{\eps^{1/2}}{1 + \exp(\eps - E_v(z) / k_B T)} \ \D \eps = \frac{\sqrt{2 k_B T} m_h^{3/2}}{\pi^2 \hbar^3} \frac{2}{\sqrt{\pi}} F_{1/2}(E_v(z) / k_B T). \label{eq:fdp}
+\end{align}
+The function $F_{j}(z)$ is the Fermi-Dirac integral with $j=1/2$ that has been implemented in GSL. The valence and conduction band energies are defined as \cite{ass}
+\bna
+E_v(z) = -k_B T \ln \lsb \frac{2}{N_A} \lb \frac{m_h k_B T}{2 \pi \hbar^2} \rb^{3/2} \rsb - e \phi(z), \\
+E_c(z) = E_v(z) + E_g,
+\ena
+where the effective mass $m_h$ and band gap $E_g$ depend on the material. The doping concentration $N_A$ is assumed to be constant.
+
+The charge density distribution can now be calculated using \cite{ass}
+\be
+\rho(z) = e \lb -N_A - n(z) + p(z) \rb.
+\ee
+Using this directly as the RHS of the Poisson equation results in instability, so this damped by a factor $\omega$ by combining with the previous iteration value $\rho^{(i-1)}(z)$:
+\bna
+\rho^{(i)}(z) = \omega \rho(z) + (1 - \omega) \rho^{(i-1)}(z).
+\ena
+We can monitor the convergence of our algorithm by calculating a residual $|\rho^{(i)}(z) - \rho^{(i-1)}|$ and comparing it to a convergence criterion $C$. The whole algorithm can be summarized as \cite{ass}:
+\begin{enumerate}
+\item Start with an initial guess for $\rho^{(i)}(z)$,
+\item Solve Poisson equation using $\rho^{(i)}(z)$,
+\item Compute Fermi-Dirac integrals and calculate new $\rho^{(i)}$ using damping,
+  \item If not converged i.e. residual $|\rho^{(i)}(z) - \rho^{(i-1)}(z)| \leq C |\rho^{(i)}(z)|$, jump to 2.
+\end{enumerate}
+
+\section{Implementation}
+
+The procedure described in section \ref{met} was implemented in C++ using LAPACK and GSL. The software consists of two main parts: the Poisson solver in file \verb|src/solver.cpp| and the main solver that computes the charge density in \verb|src/sim.cpp|. The program reads in an input file e.g. \verb|diode.in| that contains the properties of the problem such as the number of elements and material properties. This is used to configure the main solver and then the Poisson solver. The solution domain $[a, b]$ is divided into $N - 1$ equally spaced elements using $N$ points. The Poisson equation is solved iteratively until the desired convergence criterion is reached, at which point the solution is printed to an output file e.g. \verb|diode.out|. This file contains the charge density, potential and charge carrier concentration at each point, and it can be be plotted by using the Python script \verb|plot.py|.
+
+The Poisson solver is configured by setting the boundary conditions and RHS $\vb b$. Then the stencil matrix $\x A$ is constructed and the matrix equation is ready to be solved. The size of this system is $N - 2$. The Poisson solver uses LAPACK to solve the matrix equation by calling \verb|dgesv_()|. The solution $\phi(z)$ is placed in the RHS array. To evaluate the potential, the method \verb|eval()| is used. This method uses linear interpolation to compute values of $\phi(z)$ between the grid points if required.
+
+The current density is calculated from the charge carrier concentrations. Domain-specific constants in our calculations such as $\epsilon(z)$ are evaluated using methods such as \verb|getEps(z)|, which pick the appropriate constant based on the position $z$. The Fermi-Dirac integrals \ref{eq:fdn} and \ref{eq:fdp} can be evaluated using the function \verb|gsl_sf_fermi_dirac_half()|. This function is part of the special function library of GSL \footnote{\url{https://www.gnu.org/software/gsl/doc/html/specfunc.html\#fermi-dirac-function}}. According to the GSL source code, these integrals are evaluated using fitted Chebyshev polynomials, which is likely faster (and potentially more accurate) than direct numerical integration.
+
+%Abort is raised if the value in the exponential gets too big, for example if the solution diverges.
+
+The code uses the following units: $\un{nm}$ (nanometer), $\un{fs}$ (femtosecond), $\un{eV}$ (electronvolt), $\un{V}$ (volt), $\un{K}$ (kelvin) and $\un{e}$ (elementary charge). Other units and constants are expressed primarily using these units. For example, mass is $[m] = \un{eV} \usp{fs}{2} \usp{nm}{-2}$. These units were chosen as they are close in magnitude and relevant to the scale of the problem. The definitions of the physical constants used can be found in table \ref{pconst}.
+
+Calculation of the inversion voltage $V_I$ is implemented by increasing $V_G$ by some $V_\x{step}$. When the inversion voltage calculation is enabled, at convergence the voltage is increased incrementally until the charge carrier concentrations reach $n(z) > p(z)$ at some point on the bulk $z \leq t_B$. At this point the voltage has reached $V_I$ and the program terminates.
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    Constant & $k_B \ (\un{eV} \usp{K}{-1})$ & $m_e \ (\un{eV} \usp{fs}{2} \usp{nm}{-2})$ & $\hbar \ (\un{eV} \us{fs})$ & $\epsilon_0 \ (e \usp{nm}{-1} \usp{V}{-1})$ & $e$ \\
+    \hline
+    Value & $8.6173\tp{-5}$ & $5.6856$ & $6.5821\tp{-1}$ & $5.5263\tp{-2}$ & 1 \\
+    \hline
+  \end{tabular}
+  \caption{Physical constants.\label{pconst}}
+\end{table}
+
+\section{Using the code}
+
+\subsection*{Compilation}
+
+The code is compiled using a makefile, and it can be compiled by running either \verb|make| or \verb|make release|. The code is compiled with GCC (\verb|g++|) using the C++11 standard. Compilation requires the libraries \verb|lapack| (Linear Algebra Package), \verb|gsl| (GNU Scientific Library), \verb|gslcblas| (BLAS required by GSL) and \verb|m| (C math libraries). The development versions of these libraries are available in most distributions. The makefile produces the executable \verb|difidi|. The makefile target \verb|clean| removes the executable and object files.
+
+\subsection*{Running}
+Input and output for the program is done using files provided as command line arguments. The executable can be run using e.g. \verb|./difidi diode.in diode.out| or \verb|./run.sh|. The script \verb|all.sh| compiles and runs the code, and plots the results afterwards. 
+
+The configurations in \verb|diode.in| have been documented using comments. Variable names in this file match those in the \verb|Sim| class. The inversion voltage calculation is enabled if \verb|Vstep| is larger than zero (or set). The output file \verb|diode.out| has the format \verb|z rho(z) phi(z) n(z) p(z)|.
+
+Plotting is done from the file \verb|diode.out| using the Python script \verb|plot.py|, which can be run using \verb|python3 plot.py|. The plotting code uses NumPy and Matplotlib/Pyplot. The plots are saved as PDFs in the base directory.
+
+\section{Results}
+
+\trifig{doc/rhomic.pdf}{Charge density for different $t_B$.\label{rhomic}}{doc/phimic.pdf}{Potential for different $t_B$.\label{phimic}}{doc/npmic.pdf}{Charge carrier concentration for different $t_B$.\label{npmic}}
+The literature gives the following values for the properties of Si and SiO$_2$: $E_{g, \x{Si}} = 1.12 \us{eV}$ \cite{sze}, $E_{g, \x{SiO}_2} = 9. \us{eV}$ \cite{sze}, $\epsilon_\x{r, Si} = 11.9$ \cite{sze}, $\epsilon_\x{r, SiO$_2$} = 3.9$ \cite{sze}, $m_e = 1.08$ \cite{van}, $m_h = 0.81$ \cite{van}. Other constant values across all runs are the doping concentration $N_A = 10^{-5} \usp{nm}{-3}$, oxide thickness $t_\x{ox} = 50 \us{nm}$, (room) temperature $T = 300 \us{K}$ and initial guess $\rho_0 = 0$.
+
+We use a very small damping factor of $\omega = 10^{-12}$ with a convergence criterion $C = 10^{-2}$. Number of elements $N = 1000$ appears to be sufficient for all runs and reasonably fast using the general solver from LAPACK. This is not optimal, since we have a highly diagonally dominant matrix. We could disregard all the zeros which form the majority of the matrix. Doing this would reduce solution time and memory requirements, but the scale of the problem is small enough that optimizations are not crucial. Using these settings the solver converges in roughly 100 iterations with the residual decreasing smoothly.
+
+The charge density, potential and charge carrier distributions have been plotted in figures \ref{rhomic}, \ref{phimic} and \ref{npmic} for a gate voltage of $V_G = 0.4 \us{V}$ and various substrate thicknesses. The input files for these runs can be found in \verb|run/diode0.5mic.in|, \verb|run/diode1mic.in| and \verb|run/diode2mic.in|. The output files are named similarly.
+
+\dualfigs{doc/rho0.8v.pdf}{Charge density at $V_G = 0.8 \us{V}$.\label{rho08}}{doc/np0.8v.pdf}{Charge carrier concentration at $V_G = 0.8 \us{V}$.\label{np08}}{0.7}
+The inversion voltage was calculated using a $V_\x{step} = 0.001 \us{V}$ and substrate thickness $t_B = 20 \us{\mu m}$. We get a value with an error of at least the voltage step
+\bna
+V_I = 0.385 \us{V} \approx 0.39 \us{V}.
+\ena
+This is quite close to the value of $V_G = 0.4\us{V}$ used in the previous run. The program shows that the inversion occurs close to the oxide layer. Plotted in figures \ref{rho08} and \ref{np08} we can see the inversion occurring visibly with a much larger voltage of $V_G = 0.8 \us{V}$. Since we have charge carriers present, current would be able to flow at this voltage. The input file for the inversion voltage calculation can be found in \verb|run/diodevi.in|. Included is also the associated log file showing the stepping of voltage.
+
+There are multiple sources of numerical error in our calculations. The convergence criterion $C$ determines the accuracy of the iterative solution of $\rho(z)$. If we don't have a small enough damping factor, the solution oscillates and we also get error. Discretization size $N$ influences the step size $h$ and therefore the error of the Poisson solver, which is $\BO(h^2)$ for the three point stencil \cite{che}. There is also the error of the matrix solver, which depends on how this is implemented in LAPACK. For iterative solvers e.g. Gauss-Seidel there would be some kind of convergence criterion.
+
+% damping efficiency, use adaptive
+% diagonal solver efficiency
+% oxide thickness small compared to substrate
+
+\newpage
+\begin{thebibliography}{9}
+\bibitem{sze} Sze, S. M. \& Ng, K. K. Physics of Semiconductor Devices. Wiley, 3rd ed., 2007.
+  \bibitem{ass} MATR322 Numerical methods in scientific computing 2021, Final Project. University of Helsinki, 2021.
+\bibitem{che} Chen, L. Finite difference methods for Poisson equation. University of California Irvine, 2020. Available at: \url{https://www.math.uci.edu/~chenlong/226/FDM.pdf}.
+\bibitem{lec} Reisch, B. \& Lehtola, S. Numerical Methods in Scientific Computing, 12. Differential equations. University of Helsinki, 2021.
+\bibitem{kim} Kim, R., Wang, X. \& Lundstrom, M. Notes on Fermi-Dirac integrals. \href{https://arxiv.org/abs/0811.0116}{arXiv:0811.0116}.
+\bibitem{van} Van Zeghbroeck, B. J. Effective mass in semiconductors. University of Colorado Boulder, 1997. Available at: \url{https://ecee.colorado.edu/~bart/book/effmass.htm}.
+%\bibitem{cha} Chanana, R. K. Determination of hole effective mass in SiO2 and SiC conduction band offset using Fowler–Nordheim tunneling characteristics across metal-oxide-semiconductor structures after applying oxide field corrections. Journal of Applied Physics, 2011.
+\end{thebibliography}
+
+\end{document}
+
+%%% Local Variables:
+%%% TeX-command-extra-options: "-shell-escape"
+%%% coding: utf-8-unix
+%%% TeX-engine: luatex
+%%% End:

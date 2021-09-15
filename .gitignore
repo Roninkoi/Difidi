@@ -1,0 +1,13 @@
+doc
+*.o
+difidi_doc.*
+!difidi_doc.tex
+!difidi_doc.pdf
+np.pdf
+phi.pdf
+rho.pdf
+difidi
+difidi_debug
+diode.out
+out.log
+.idea

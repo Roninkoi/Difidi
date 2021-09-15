@@ -1,0 +1,883 @@
+Diode finite differences, Roni Koitermaa 2021
+Sun May 23 21:09:37 2021
+
+infile: run/diodevi.in, outfile: diode.out
+N: 1000, C: 0.01, w: 1e-12, rho0: 0, T: 300
+tB: 20000, tOx: 50, VG: 0
+NA: 1e-05, EgSi: 1.12, EgOx: 9, epsSi: 11.9, epsOx: 3.9
+meSi: 1.08, mhSi: 0.81
+
+Starting to solve...
+iteration: 0, residual: 0.997 (0.01)
+iteration: 1, residual: 0.498499 (0.02)
+iteration: 2, residual: 0.332332 (0.03)
+iteration: 3, residual: 0.249248 (0.04)
+iteration: 4, residual: 0.199398 (0.05)
+iteration: 5, residual: 0.166165 (0.06)
+iteration: 6, residual: 0.142427 (0.07)
+iteration: 7, residual: 0.124623 (0.08)
+iteration: 8, residual: 0.110776 (0.09)
+iteration: 9, residual: 0.0996979 (0.1)
+iteration: 10, residual: 0.0906342 (0.11)
+iteration: 11, residual: 0.0830812 (0.12)
+iteration: 12, residual: 0.0766901 (0.13)
+iteration: 13, residual: 0.0712121 (0.14)
+iteration: 14, residual: 0.0664645 (0.15)
+iteration: 15, residual: 0.0623103 (0.16)
+iteration: 16, residual: 0.0586448 (0.17)
+iteration: 17, residual: 0.0553867 (0.18)
+iteration: 18, residual: 0.0524714 (0.19)
+iteration: 19, residual: 0.0498478 (0.2)
+iteration: 20, residual: 0.0474739 (0.21)
+iteration: 21, residual: 0.0453159 (0.22)
+iteration: 22, residual: 0.0433456 (0.23)
+iteration: 23, residual: 0.0415394 (0.24)
+iteration: 24, residual: 0.0398777 (0.25)
+iteration: 25, residual: 0.0383439 (0.26)
+iteration: 26, residual: 0.0369236 (0.27)
+iteration: 27, residual: 0.0356049 (0.28)
+iteration: 28, residual: 0.034377 (0.29)
+iteration: 29, residual: 0.033231 (0.3)
+iteration: 30, residual: 0.032159 (0.31)
+iteration: 31, residual: 0.031154 (0.32)
+iteration: 32, residual: 0.0302098 (0.33)
+iteration: 33, residual: 0.0293212 (0.34)
+iteration: 34, residual: 0.0284834 (0.35)
+iteration: 35, residual: 0.0276921 (0.36)
+iteration: 36, residual: 0.0269436 (0.37)
+iteration: 37, residual: 0.0262345 (0.38)
+iteration: 38, residual: 0.0255618 (0.39)
+iteration: 39, residual: 0.0249227 (0.4)
+iteration: 40, residual: 0.0243148 (0.41)
+iteration: 41, residual: 0.0237358 (0.42)
+iteration: 42, residual: 0.0231837 (0.43)
+iteration: 43, residual: 0.0226568 (0.44)
+iteration: 44, residual: 0.0221532 (0.45)
+iteration: 45, residual: 0.0216716 (0.46)
+iteration: 46, residual: 0.0212104 (0.47)
+iteration: 47, residual: 0.0207685 (0.48)
+iteration: 48, residual: 0.0203446 (0.49)
+iteration: 49, residual: 0.0199377 (0.5)
+iteration: 50, residual: 0.0195467 (0.51)
+iteration: 51, residual: 0.0191708 (0.52)
+iteration: 52, residual: 0.018809 (0.53)
+iteration: 53, residual: 0.0184606 (0.54)
+iteration: 54, residual: 0.0181249 (0.55)
+iteration: 55, residual: 0.0178012 (0.56)
+iteration: 56, residual: 0.0174889 (0.57)
+iteration: 57, residual: 0.0171873 (0.58)
+iteration: 58, residual: 0.016896 (0.59)
+iteration: 59, residual: 0.0166143 (0.600001)
+iteration: 60, residual: 0.0163419 (0.610001)
+iteration: 61, residual: 0.0160783 (0.620001)
+iteration: 62, residual: 0.0158231 (0.630001)
+iteration: 63, residual: 0.0155758 (0.640001)
+iteration: 64, residual: 0.0153361 (0.650001)
+iteration: 65, residual: 0.0151037 (0.660001)
+iteration: 66, residual: 0.0148783 (0.670001)
+iteration: 67, residual: 0.0146594 (0.680001)
+iteration: 68, residual: 0.0144469 (0.690001)
+iteration: 69, residual: 0.0142405 (0.700001)
+iteration: 70, residual: 0.0140399 (0.710001)
+iteration: 71, residual: 0.0138449 (0.720001)
+iteration: 72, residual: 0.0136552 (0.730001)
+iteration: 73, residual: 0.0134706 (0.740001)
+iteration: 74, residual: 0.013291 (0.750001)
+iteration: 75, residual: 0.0131161 (0.760001)
+iteration: 76, residual: 0.0129457 (0.770001)
+iteration: 77, residual: 0.0127797 (0.780001)
+iteration: 78, residual: 0.0126179 (0.790001)
+iteration: 79, residual: 0.0124602 (0.800001)
+iteration: 80, residual: 0.0123063 (0.810001)
+iteration: 81, residual: 0.0121562 (0.820001)
+iteration: 82, residual: 0.0120097 (0.830001)
+iteration: 83, residual: 0.0118667 (0.840001)
+iteration: 84, residual: 0.0117271 (0.850001)
+iteration: 85, residual: 0.0115907 (0.860001)
+iteration: 86, residual: 0.0114574 (0.870001)
+iteration: 87, residual: 0.0113272 (0.880001)
+iteration: 88, residual: 0.0111999 (0.890001)
+iteration: 89, residual: 0.0110754 (0.900001)
+iteration: 90, residual: 0.0109537 (0.910001)
+iteration: 91, residual: 0.0108346 (0.920001)
+iteration: 92, residual: 0.0107181 (0.930001)
+iteration: 93, residual: 0.010604 (0.940001)
+iteration: 94, residual: 0.0104924 (0.950001)
+iteration: 95, residual: 0.0103831 (0.960001)
+iteration: 96, residual: 0.010276 (0.970001)
+iteration: 97, residual: 0.0101711 (0.980001)
+iteration: 98, residual: 0.0100684 (0.990001)
+iteration: 99, residual: 0.00996766 (1)
+VG: 0.001
+iteration: 100, residual: 0.00968177 (1)
+VG: 0.002
+iteration: 101, residual: 0.0094078 (1)
+VG: 0.003
+iteration: 102, residual: 0.00914507 (1)
+VG: 0.004
+iteration: 103, residual: 0.00889294 (1)
+VG: 0.005
+iteration: 104, residual: 0.00865084 (1)
+VG: 0.006
+iteration: 105, residual: 0.00841821 (1)
+VG: 0.007
+iteration: 106, residual: 0.00819455 (1)
+VG: 0.008
+iteration: 107, residual: 0.00797939 (1)
+VG: 0.009
+iteration: 108, residual: 0.0077723 (1)
+VG: 0.01
+iteration: 109, residual: 0.00757286 (1)
+VG: 0.011
+iteration: 110, residual: 0.0073807 (1)
+VG: 0.012
+iteration: 111, residual: 0.00719545 (1)
+VG: 0.013
+iteration: 112, residual: 0.00701679 (1)
+VG: 0.014
+iteration: 113, residual: 0.0068444 (1)
+VG: 0.015
+iteration: 114, residual: 0.00667799 (1)
+VG: 0.016
+iteration: 115, residual: 0.00651728 (1)
+VG: 0.017
+iteration: 116, residual: 0.00636201 (1)
+VG: 0.018
+iteration: 117, residual: 0.00621195 (1)
+VG: 0.019
+iteration: 118, residual: 0.00606685 (1)
+VG: 0.02
+iteration: 119, residual: 0.00592651 (1)
+VG: 0.021
+iteration: 120, residual: 0.00579071 (1)
+VG: 0.022
+iteration: 121, residual: 0.00565927 (1)
+VG: 0.023
+iteration: 122, residual: 0.005532 (1)
+VG: 0.024
+iteration: 123, residual: 0.00540872 (1)
+VG: 0.025
+iteration: 124, residual: 0.00528929 (1)
+VG: 0.026
+iteration: 125, residual: 0.00517353 (1)
+VG: 0.027
+iteration: 126, residual: 0.0050613 (1)
+VG: 0.028
+iteration: 127, residual: 0.00495247 (1)
+VG: 0.029
+iteration: 128, residual: 0.0048469 (1)
+VG: 0.03
+iteration: 129, residual: 0.00474446 (1)
+VG: 0.031
+iteration: 130, residual: 0.00464503 (1)
+VG: 0.032
+iteration: 131, residual: 0.0045485 (1)
+VG: 0.033
+iteration: 132, residual: 0.00445476 (1)
+VG: 0.034
+iteration: 133, residual: 0.00436371 (1)
+VG: 0.035
+iteration: 134, residual: 0.00427525 (1)
+VG: 0.036
+iteration: 135, residual: 0.00418928 (1)
+VG: 0.037
+iteration: 136, residual: 0.00410572 (1)
+VG: 0.038
+iteration: 137, residual: 0.00402447 (1)
+VG: 0.039
+iteration: 138, residual: 0.00394546 (1)
+VG: 0.04
+iteration: 139, residual: 0.0038686 (1)
+VG: 0.041
+iteration: 140, residual: 0.00379383 (1)
+VG: 0.042
+iteration: 141, residual: 0.00372107 (1)
+VG: 0.043
+iteration: 142, residual: 0.00365025 (1)
+VG: 0.044
+iteration: 143, residual: 0.00358131 (1)
+VG: 0.045
+iteration: 144, residual: 0.00351418 (1)
+VG: 0.046
+iteration: 145, residual: 0.0034488 (1)
+VG: 0.047
+iteration: 146, residual: 0.00338512 (1)
+VG: 0.048
+iteration: 147, residual: 0.00332307 (1)
+VG: 0.049
+iteration: 148, residual: 0.00326261 (1)
+VG: 0.05
+iteration: 149, residual: 0.00320369 (1)
+VG: 0.051
+iteration: 150, residual: 0.00314625 (1)
+VG: 0.052
+iteration: 151, residual: 0.00309025 (1)
+VG: 0.053
+iteration: 152, residual: 0.00303564 (1)
+VG: 0.054
+iteration: 153, residual: 0.00298238 (1)
+VG: 0.055
+iteration: 154, residual: 0.00293042 (1)
+VG: 0.056
+iteration: 155, residual: 0.00287973 (1)
+VG: 0.057
+iteration: 156, residual: 0.00283028 (1)
+VG: 0.058
+iteration: 157, residual: 0.00278201 (1)
+VG: 0.059
+iteration: 158, residual: 0.00273489 (1)
+VG: 0.06
+iteration: 159, residual: 0.00268889 (1)
+VG: 0.061
+iteration: 160, residual: 0.00264398 (1)
+VG: 0.062
+iteration: 161, residual: 0.00260013 (1)
+VG: 0.063
+iteration: 162, residual: 0.00255729 (1)
+VG: 0.064
+iteration: 163, residual: 0.00251545 (1)
+VG: 0.065
+iteration: 164, residual: 0.00247457 (1)
+VG: 0.066
+iteration: 165, residual: 0.00243463 (1)
+VG: 0.067
+iteration: 166, residual: 0.00239559 (1)
+VG: 0.068
+iteration: 167, residual: 0.00235744 (1)
+VG: 0.069
+iteration: 168, residual: 0.00232015 (1)
+VG: 0.07
+iteration: 169, residual: 0.00228369 (1)
+VG: 0.071
+iteration: 170, residual: 0.00224804 (1)
+VG: 0.072
+iteration: 171, residual: 0.00221318 (1)
+VG: 0.073
+iteration: 172, residual: 0.00217908 (1)
+VG: 0.074
+iteration: 173, residual: 0.00214572 (1)
+VG: 0.075
+iteration: 174, residual: 0.0021131 (1)
+VG: 0.076
+iteration: 175, residual: 0.00208117 (1)
+VG: 0.077
+iteration: 176, residual: 0.00204993 (1)
+VG: 0.078
+iteration: 177, residual: 0.00201936 (1)
+VG: 0.079
+iteration: 178, residual: 0.00198943 (1)
+VG: 0.08
+iteration: 179, residual: 0.00196014 (1)
+VG: 0.081
+iteration: 180, residual: 0.00193146 (1)
+VG: 0.082
+iteration: 181, residual: 0.00190338 (1)
+VG: 0.083
+iteration: 182, residual: 0.00187588 (1)
+VG: 0.084
+iteration: 183, residual: 0.00184894 (1)
+VG: 0.085
+iteration: 184, residual: 0.00182256 (1)
+VG: 0.086
+iteration: 185, residual: 0.00179672 (1)
+VG: 0.087
+iteration: 186, residual: 0.00177141 (1)
+VG: 0.088
+iteration: 187, residual: 0.0017466 (1)
+VG: 0.089
+iteration: 188, residual: 0.00172229 (1)
+VG: 0.09
+iteration: 189, residual: 0.00169847 (1)
+VG: 0.091
+iteration: 190, residual: 0.00167512 (1)
+VG: 0.092
+iteration: 191, residual: 0.00165223 (1)
+VG: 0.093
+iteration: 192, residual: 0.00162979 (1)
+VG: 0.094
+iteration: 193, residual: 0.00160778 (1)
+VG: 0.095
+iteration: 194, residual: 0.00158621 (1)
+VG: 0.096
+iteration: 195, residual: 0.00156505 (1)
+VG: 0.097
+iteration: 196, residual: 0.0015443 (1)
+VG: 0.098
+iteration: 197, residual: 0.00152395 (1)
+VG: 0.099
+iteration: 198, residual: 0.00150398 (1)
+VG: 0.1
+iteration: 199, residual: 0.00148439 (1)
+VG: 0.101
+iteration: 200, residual: 0.00146517 (1)
+VG: 0.102
+iteration: 201, residual: 0.00144631 (1)
+VG: 0.103
+iteration: 202, residual: 0.0014278 (1)
+VG: 0.104
+iteration: 203, residual: 0.00140963 (1)
+VG: 0.105
+iteration: 204, residual: 0.0013918 (1)
+VG: 0.106
+iteration: 205, residual: 0.00137429 (1)
+VG: 0.107
+iteration: 206, residual: 0.00135711 (1)
+VG: 0.108
+iteration: 207, residual: 0.00134023 (1)
+VG: 0.109
+iteration: 208, residual: 0.00132366 (1)
+VG: 0.11
+iteration: 209, residual: 0.00130739 (1)
+VG: 0.111
+iteration: 210, residual: 0.00129141 (1)
+VG: 0.112
+iteration: 211, residual: 0.00127571 (1)
+VG: 0.113
+iteration: 212, residual: 0.00126029 (1)
+VG: 0.114
+iteration: 213, residual: 0.00124514 (1)
+VG: 0.115
+iteration: 214, residual: 0.00123026 (1)
+VG: 0.116
+iteration: 215, residual: 0.00121563 (1)
+VG: 0.117
+iteration: 216, residual: 0.00120126 (1)
+VG: 0.118
+iteration: 217, residual: 0.00118714 (1)
+VG: 0.119
+iteration: 218, residual: 0.00117326 (1)
+VG: 0.12
+iteration: 219, residual: 0.00115961 (1)
+VG: 0.121
+iteration: 220, residual: 0.0011462 (1)
+VG: 0.122
+iteration: 221, residual: 0.00113301 (1)
+VG: 0.123
+iteration: 222, residual: 0.00112005 (1)
+VG: 0.124
+iteration: 223, residual: 0.0011073 (1)
+VG: 0.125
+iteration: 224, residual: 0.00109477 (1)
+VG: 0.126
+iteration: 225, residual: 0.00108244 (1)
+VG: 0.127
+iteration: 226, residual: 0.00107031 (1)
+VG: 0.128
+iteration: 227, residual: 0.00105839 (1)
+VG: 0.129
+iteration: 228, residual: 0.00104666 (1)
+VG: 0.13
+iteration: 229, residual: 0.00103511 (1)
+VG: 0.131
+iteration: 230, residual: 0.00102376 (1)
+VG: 0.132
+iteration: 231, residual: 0.00101259 (1)
+VG: 0.133
+iteration: 232, residual: 0.0010016 (1)
+VG: 0.134
+iteration: 233, residual: 0.000990777 (1)
+VG: 0.135
+iteration: 234, residual: 0.000980131 (1)
+VG: 0.136
+iteration: 235, residual: 0.000969652 (1)
+VG: 0.137
+iteration: 236, residual: 0.000959337 (1)
+VG: 0.138
+iteration: 237, residual: 0.000949184 (1)
+VG: 0.139
+iteration: 238, residual: 0.000939188 (1)
+VG: 0.14
+iteration: 239, residual: 0.000929347 (1)
+VG: 0.141
+iteration: 240, residual: 0.000919658 (1)
+VG: 0.142
+iteration: 241, residual: 0.000910116 (1)
+VG: 0.143
+iteration: 242, residual: 0.00090073 (1)
+VG: 0.144
+iteration: 243, residual: 0.000891504 (1)
+VG: 0.145
+iteration: 244, residual: 0.000882433 (1)
+VG: 0.146
+iteration: 245, residual: 0.000873514 (1)
+VG: 0.147
+iteration: 246, residual: 0.000864743 (1)
+VG: 0.148
+iteration: 247, residual: 0.000856118 (1)
+VG: 0.149
+iteration: 248, residual: 0.000847634 (1)
+VG: 0.15
+iteration: 249, residual: 0.000839288 (1)
+VG: 0.151
+iteration: 250, residual: 0.000831077 (1)
+VG: 0.152
+iteration: 251, residual: 0.000822998 (1)
+VG: 0.153
+iteration: 252, residual: 0.000815048 (1)
+VG: 0.154
+iteration: 253, residual: 0.000807224 (1)
+VG: 0.155
+iteration: 254, residual: 0.000799523 (1)
+VG: 0.156
+iteration: 255, residual: 0.000791943 (1)
+VG: 0.157
+iteration: 256, residual: 0.00078448 (1)
+VG: 0.158
+iteration: 257, residual: 0.000777133 (1)
+VG: 0.159
+iteration: 258, residual: 0.000769898 (1)
+VG: 0.16
+iteration: 259, residual: 0.000762774 (1)
+VG: 0.161
+iteration: 260, residual: 0.000755757 (1)
+VG: 0.162
+iteration: 261, residual: 0.000748846 (1)
+VG: 0.163
+iteration: 262, residual: 0.000742038 (1)
+VG: 0.164
+iteration: 263, residual: 0.000735331 (1)
+VG: 0.165
+iteration: 264, residual: 0.000728724 (1)
+VG: 0.166
+iteration: 265, residual: 0.000722213 (1)
+VG: 0.167
+iteration: 266, residual: 0.000715797 (1)
+VG: 0.168
+iteration: 267, residual: 0.000709475 (1)
+VG: 0.169
+iteration: 268, residual: 0.000703243 (1)
+VG: 0.17
+iteration: 269, residual: 0.000697101 (1)
+VG: 0.171
+iteration: 270, residual: 0.000691046 (1)
+VG: 0.172
+iteration: 271, residual: 0.000685077 (1)
+VG: 0.173
+iteration: 272, residual: 0.000679192 (1)
+VG: 0.174
+iteration: 273, residual: 0.00067339 (1)
+VG: 0.175
+iteration: 274, residual: 0.000667668 (1)
+VG: 0.176
+iteration: 275, residual: 0.000662025 (1)
+VG: 0.177
+iteration: 276, residual: 0.00065646 (1)
+VG: 0.178
+iteration: 277, residual: 0.000650971 (1)
+VG: 0.179
+iteration: 278, residual: 0.000645557 (1)
+VG: 0.18
+iteration: 279, residual: 0.000640216 (1)
+VG: 0.181
+iteration: 280, residual: 0.000634947 (1)
+VG: 0.182
+iteration: 281, residual: 0.000629748 (1)
+VG: 0.183
+iteration: 282, residual: 0.000624619 (1)
+VG: 0.184
+iteration: 283, residual: 0.000619558 (1)
+VG: 0.185
+iteration: 284, residual: 0.000614563 (1)
+VG: 0.186
+iteration: 285, residual: 0.000609634 (1)
+VG: 0.187
+iteration: 286, residual: 0.000604768 (1)
+VG: 0.188
+iteration: 287, residual: 0.000599967 (1)
+VG: 0.189
+iteration: 288, residual: 0.000595227 (1)
+VG: 0.19
+iteration: 289, residual: 0.000590547 (1)
+VG: 0.191
+iteration: 290, residual: 0.000585928 (1)
+VG: 0.192
+iteration: 291, residual: 0.000581367 (1)
+VG: 0.193
+iteration: 292, residual: 0.000576864 (1)
+VG: 0.194
+iteration: 293, residual: 0.000572418 (1)
+VG: 0.195
+iteration: 294, residual: 0.000568027 (1)
+VG: 0.196
+iteration: 295, residual: 0.000563691 (1)
+VG: 0.197
+iteration: 296, residual: 0.000559408 (1)
+VG: 0.198
+iteration: 297, residual: 0.000555179 (1)
+VG: 0.199
+iteration: 298, residual: 0.000551001 (1)
+VG: 0.2
+iteration: 299, residual: 0.000546875 (1)
+VG: 0.201
+iteration: 300, residual: 0.000542798 (1)
+VG: 0.202
+iteration: 301, residual: 0.000538771 (1)
+VG: 0.203
+iteration: 302, residual: 0.000534793 (1)
+VG: 0.204
+iteration: 303, residual: 0.000530862 (1)
+VG: 0.205
+iteration: 304, residual: 0.000526978 (1)
+VG: 0.206
+iteration: 305, residual: 0.00052314 (1)
+VG: 0.207
+iteration: 306, residual: 0.000519347 (1)
+VG: 0.208
+iteration: 307, residual: 0.000515599 (1)
+VG: 0.209
+iteration: 308, residual: 0.000511895 (1)
+VG: 0.21
+iteration: 309, residual: 0.000508234 (1)
+VG: 0.211
+iteration: 310, residual: 0.000504616 (1)
+VG: 0.212
+iteration: 311, residual: 0.00050104 (1)
+VG: 0.213
+iteration: 312, residual: 0.000497504 (1)
+VG: 0.214
+iteration: 313, residual: 0.000494009 (1)
+VG: 0.215
+iteration: 314, residual: 0.000490554 (1)
+VG: 0.216
+iteration: 315, residual: 0.000487139 (1)
+VG: 0.217
+iteration: 316, residual: 0.000483762 (1)
+VG: 0.218
+iteration: 317, residual: 0.000480423 (1)
+VG: 0.219
+iteration: 318, residual: 0.000477121 (1)
+VG: 0.22
+iteration: 319, residual: 0.000473856 (1)
+VG: 0.221
+iteration: 320, residual: 0.000470628 (1)
+VG: 0.222
+iteration: 321, residual: 0.000467435 (1)
+VG: 0.223
+iteration: 322, residual: 0.000464277 (1)
+VG: 0.224
+iteration: 323, residual: 0.000461154 (1)
+VG: 0.225
+iteration: 324, residual: 0.000458066 (1)
+VG: 0.226
+iteration: 325, residual: 0.00045501 (1)
+VG: 0.227
+iteration: 326, residual: 0.000451988 (1)
+VG: 0.228
+iteration: 327, residual: 0.000448999 (1)
+VG: 0.229
+iteration: 328, residual: 0.000446042 (1)
+VG: 0.23
+iteration: 329, residual: 0.000443116 (1)
+VG: 0.231
+iteration: 330, residual: 0.000440222 (1)
+VG: 0.232
+iteration: 331, residual: 0.000437358 (1)
+VG: 0.233
+iteration: 332, residual: 0.000434525 (1)
+VG: 0.234
+iteration: 333, residual: 0.000431722 (1)
+VG: 0.235
+iteration: 334, residual: 0.000428948 (1)
+VG: 0.236
+iteration: 335, residual: 0.000426203 (1)
+VG: 0.237
+iteration: 336, residual: 0.000423486 (1)
+VG: 0.238
+iteration: 337, residual: 0.000420798 (1)
+VG: 0.239
+iteration: 338, residual: 0.000418138 (1)
+VG: 0.24
+iteration: 339, residual: 0.000415505 (1)
+VG: 0.241
+iteration: 340, residual: 0.000412899 (1)
+VG: 0.242
+iteration: 341, residual: 0.00041032 (1)
+VG: 0.243
+iteration: 342, residual: 0.000407767 (1)
+VG: 0.244
+iteration: 343, residual: 0.00040524 (1)
+VG: 0.245
+iteration: 344, residual: 0.000402738 (1)
+VG: 0.246
+iteration: 345, residual: 0.000400262 (1)
+VG: 0.247
+iteration: 346, residual: 0.00039781 (1)
+VG: 0.248
+iteration: 347, residual: 0.000395383 (1)
+VG: 0.249
+iteration: 348, residual: 0.00039298 (1)
+VG: 0.25
+iteration: 349, residual: 0.000390601 (1)
+VG: 0.251
+iteration: 350, residual: 0.000388246 (1)
+VG: 0.252
+iteration: 351, residual: 0.000385914 (1)
+VG: 0.253
+iteration: 352, residual: 0.000383604 (1)
+VG: 0.254
+iteration: 353, residual: 0.000381317 (1)
+VG: 0.255
+iteration: 354, residual: 0.000379053 (1)
+VG: 0.256
+iteration: 355, residual: 0.00037681 (1)
+VG: 0.257
+iteration: 356, residual: 0.00037459 (1)
+VG: 0.258
+iteration: 357, residual: 0.00037239 (1)
+VG: 0.259
+iteration: 358, residual: 0.000370212 (1)
+VG: 0.26
+iteration: 359, residual: 0.000368055 (1)
+VG: 0.261
+iteration: 360, residual: 0.000365918 (1)
+VG: 0.262
+iteration: 361, residual: 0.000363801 (1)
+VG: 0.263
+iteration: 362, residual: 0.000361705 (1)
+VG: 0.264
+iteration: 363, residual: 0.000359628 (1)
+VG: 0.265
+iteration: 364, residual: 0.000357571 (1)
+VG: 0.266
+iteration: 365, residual: 0.000355533 (1)
+VG: 0.267
+iteration: 366, residual: 0.000353514 (1)
+VG: 0.268
+iteration: 367, residual: 0.000351515 (1)
+VG: 0.269
+iteration: 368, residual: 0.000349533 (1)
+VG: 0.27
+iteration: 369, residual: 0.00034757 (1)
+VG: 0.271
+iteration: 370, residual: 0.000345625 (1)
+VG: 0.272
+iteration: 371, residual: 0.000343698 (1)
+VG: 0.273
+iteration: 372, residual: 0.000341789 (1)
+VG: 0.274
+iteration: 373, residual: 0.000339897 (1)
+VG: 0.275
+iteration: 374, residual: 0.000338022 (1)
+VG: 0.276
+iteration: 375, residual: 0.000336164 (1)
+VG: 0.277
+iteration: 376, residual: 0.000334323 (1)
+VG: 0.278
+iteration: 377, residual: 0.000332499 (1)
+VG: 0.279
+iteration: 378, residual: 0.000330691 (1)
+VG: 0.28
+iteration: 379, residual: 0.000328899 (1)
+VG: 0.281
+iteration: 380, residual: 0.000327124 (1)
+VG: 0.282
+iteration: 381, residual: 0.000325364 (1)
+VG: 0.283
+iteration: 382, residual: 0.000323619 (1)
+VG: 0.284
+iteration: 383, residual: 0.000321891 (1)
+VG: 0.285
+iteration: 384, residual: 0.000320177 (1)
+VG: 0.286
+iteration: 385, residual: 0.000318478 (1)
+VG: 0.287
+iteration: 386, residual: 0.000316794 (1)
+VG: 0.288
+iteration: 387, residual: 0.000315125 (1)
+VG: 0.289
+iteration: 388, residual: 0.000313471 (1)
+VG: 0.29
+iteration: 389, residual: 0.000311831 (1)
+VG: 0.291
+iteration: 390, residual: 0.000310205 (1)
+VG: 0.292
+iteration: 391, residual: 0.000308593 (1)
+VG: 0.293
+iteration: 392, residual: 0.000306995 (1)
+VG: 0.294
+iteration: 393, residual: 0.00030541 (1)
+VG: 0.295
+iteration: 394, residual: 0.00030384 (1)
+VG: 0.296
+iteration: 395, residual: 0.000302282 (1)
+VG: 0.297
+iteration: 396, residual: 0.000300738 (1)
+VG: 0.298
+iteration: 397, residual: 0.000299207 (1)
+VG: 0.299
+iteration: 398, residual: 0.000297689 (1)
+VG: 0.3
+iteration: 399, residual: 0.000296183 (1)
+VG: 0.301
+iteration: 400, residual: 0.00029469 (1)
+VG: 0.302
+iteration: 401, residual: 0.00029321 (1)
+VG: 0.303
+iteration: 402, residual: 0.000291742 (1)
+VG: 0.304
+iteration: 403, residual: 0.000290286 (1)
+VG: 0.305
+iteration: 404, residual: 0.000288843 (1)
+VG: 0.306
+iteration: 405, residual: 0.000287411 (1)
+VG: 0.307
+iteration: 406, residual: 0.000285991 (1)
+VG: 0.308
+iteration: 407, residual: 0.000284583 (1)
+VG: 0.309
+iteration: 408, residual: 0.000283186 (1)
+VG: 0.31
+iteration: 409, residual: 0.000281801 (1)
+VG: 0.311
+iteration: 410, residual: 0.000280427 (1)
+VG: 0.312
+iteration: 411, residual: 0.000279064 (1)
+VG: 0.313
+iteration: 412, residual: 0.000277712 (1)
+VG: 0.314
+iteration: 413, residual: 0.000276371 (1)
+VG: 0.315
+iteration: 414, residual: 0.000275041 (1)
+VG: 0.316
+iteration: 415, residual: 0.000273722 (1)
+VG: 0.317
+iteration: 416, residual: 0.000272413 (1)
+VG: 0.318
+iteration: 417, residual: 0.000271114 (1)
+VG: 0.319
+iteration: 418, residual: 0.000269826 (1)
+VG: 0.32
+iteration: 419, residual: 0.000268549 (1)
+VG: 0.321
+iteration: 420, residual: 0.000267281 (1)
+VG: 0.322
+iteration: 421, residual: 0.000266023 (1)
+VG: 0.323
+iteration: 422, residual: 0.000264776 (1)
+VG: 0.324
+iteration: 423, residual: 0.000263538 (1)
+VG: 0.325
+iteration: 424, residual: 0.000262309 (1)
+VG: 0.326
+iteration: 425, residual: 0.000261091 (1)
+VG: 0.327
+iteration: 426, residual: 0.000259881 (1)
+VG: 0.328
+iteration: 427, residual: 0.000258682 (1)
+VG: 0.329
+iteration: 428, residual: 0.000257491 (1)
+VG: 0.33
+iteration: 429, residual: 0.00025631 (1)
+VG: 0.331
+iteration: 430, residual: 0.000255138 (1)
+VG: 0.332
+iteration: 431, residual: 0.000253975 (1)
+VG: 0.333
+iteration: 432, residual: 0.000252821 (1)
+VG: 0.334
+iteration: 433, residual: 0.000251675 (1)
+VG: 0.335
+iteration: 434, residual: 0.000250538 (1)
+VG: 0.336
+iteration: 435, residual: 0.00024941 (1)
+VG: 0.337
+iteration: 436, residual: 0.000248291 (1)
+VG: 0.338
+iteration: 437, residual: 0.00024718 (1)
+VG: 0.339
+iteration: 438, residual: 0.000246077 (1)
+VG: 0.34
+iteration: 439, residual: 0.000244983 (1)
+VG: 0.341
+iteration: 440, residual: 0.000243897 (1)
+VG: 0.342
+iteration: 441, residual: 0.000242819 (1)
+VG: 0.343
+iteration: 442, residual: 0.000241749 (1)
+VG: 0.344
+iteration: 443, residual: 0.000240687 (1)
+VG: 0.345
+iteration: 444, residual: 0.000239633 (1)
+VG: 0.346
+iteration: 445, residual: 0.000238587 (1)
+VG: 0.347
+iteration: 446, residual: 0.000237548 (1)
+VG: 0.348
+iteration: 447, residual: 0.000236517 (1)
+VG: 0.349
+iteration: 448, residual: 0.000235494 (1)
+VG: 0.35
+iteration: 449, residual: 0.000234478 (1)
+VG: 0.351
+iteration: 450, residual: 0.00023347 (1)
+VG: 0.352
+iteration: 451, residual: 0.000232469 (1)
+VG: 0.353
+iteration: 452, residual: 0.000231475 (1)
+VG: 0.354
+iteration: 453, residual: 0.000230488 (1)
+VG: 0.355
+iteration: 454, residual: 0.000229509 (1)
+VG: 0.356
+iteration: 455, residual: 0.000228537 (1)
+VG: 0.357
+iteration: 456, residual: 0.000227572 (1)
+VG: 0.358
+iteration: 457, residual: 0.000226613 (1)
+VG: 0.359
+iteration: 458, residual: 0.000225662 (1)
+VG: 0.36
+iteration: 459, residual: 0.000224717 (1)
+VG: 0.361
+iteration: 460, residual: 0.000223779 (1)
+VG: 0.362
+iteration: 461, residual: 0.000222848 (1)
+VG: 0.363
+iteration: 462, residual: 0.000221923 (1)
+VG: 0.364
+iteration: 463, residual: 0.000221005 (1)
+VG: 0.365
+iteration: 464, residual: 0.000220093 (1)
+VG: 0.366
+iteration: 465, residual: 0.000219188 (1)
+VG: 0.367
+iteration: 466, residual: 0.000218289 (1)
+VG: 0.368
+iteration: 467, residual: 0.000217396 (1)
+VG: 0.369
+iteration: 468, residual: 0.00021651 (1)
+VG: 0.37
+iteration: 469, residual: 0.00021563 (1)
+VG: 0.371
+iteration: 470, residual: 0.000214756 (1)
+VG: 0.372
+iteration: 471, residual: 0.000213888 (1)
+VG: 0.373
+iteration: 472, residual: 0.000213026 (1)
+VG: 0.374
+iteration: 473, residual: 0.00021217 (1)
+VG: 0.375
+iteration: 474, residual: 0.00021132 (1)
+VG: 0.376
+iteration: 475, residual: 0.000210476 (1)
+VG: 0.377
+iteration: 476, residual: 0.000209637 (1)
+VG: 0.378
+iteration: 477, residual: 0.000208805 (1)
+VG: 0.379
+iteration: 478, residual: 0.000207977 (1)
+VG: 0.38
+iteration: 479, residual: 0.000207156 (1)
+VG: 0.381
+iteration: 480, residual: 0.00020634 (1)
+VG: 0.382
+iteration: 481, residual: 0.00020553 (1)
+VG: 0.383
+iteration: 482, residual: 0.000204725 (1)
+VG: 0.384
+iteration: 483, residual: 0.000203926 (1)
+VG: 0.385
+iteration: 484, residual: 0.000203132 (1)
+n > p, z = 19989.8
+VI: 0.385
+Done!

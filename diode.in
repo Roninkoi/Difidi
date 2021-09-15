@@ -1,0 +1,25 @@
+N 1000 # number of elements
+C 1.e-2 # convergence criterion
+w 1.e-12 # damping factor
+rho0 0. # initial guess for density (e / nm^3)
+T 3000. # temperature (K)
+
+tOx 50. # thickness of oxide (nm)
+tB 20.e3 # thickness of Si (nm)
+VG 0.4 # gate voltage (V)
+#Vstep 0.1 # if > 0, step voltage up until n > p
+
+NA 1.e-5 # doping concentration (nm^-3)
+EgSi 1.12 # band gap of Si (eV) [1]
+EgOx 9. # band gap of SiO2 (eV) [1]
+
+epsSi 11.9 # p-type Si relative dielectric constant [1]
+epsOx 3.9 # SiO2 dielectric constant [1]
+
+meSi 1.08 # Si effective masses (me0) [2]
+mhSi 0.81
+
+# Sources for Si and SiO2 properties:
+# [1] Sze, S. M. & Ng, K. K. Physics of Semiconductor Devices. Wiley, 3rd ed., 2007.
+# [2] Van Zeghbroeck, B. J. Effective mass in semiconductors. University of Colorado Boulder, 1997. Available at: https://ecee.colorado.edu/~bart/book/effmass.htm.
+
