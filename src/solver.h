@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <math.h>
+#include <cstring>
 
 #include "util.h"
 
@@ -29,9 +30,10 @@ public:
 
 	void setRHS(double *b) // set b of equation (this is a pointer to f)
 	{
-		bx.m = b;
+		memcpy(bx.m, b, sizeof(double) * M);
+		/*bx.m = b;
 		bx.c = 1;
-		bx.r = M;
+		bx.r = M;*/
 	}
 
 	double eval(double z); // evaluate phi(z) using linear interpolation

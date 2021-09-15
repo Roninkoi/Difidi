@@ -15,15 +15,16 @@
 
 class Sim {
 public:
-	Sim(string inpath, string outpath); // load settings from file
+	Sim(string ipath, string opath); // load settings from file
 	int run(); // main loop of simulation
 	
 private:
 	ifstream infile; // in / out files
 	ofstream outfile;
+	string outpath;
 
-	bool running = true; // simulator running?
 	int ticks = 0; // simulator cycle
+	bool rtWrite = false; // write to file in real time?
 
 	int N = 0; // number of elements
 	double w = 0.5; // damping factor
@@ -53,6 +54,8 @@ private:
 
 	PoissonSolver psolver; // solver for Poisson equation
 
+	void write(); // write to file
+	
 	double getZ(int i); // get position from index
 	double getMe(double z); // get effective mass
 	double getMh(double z);

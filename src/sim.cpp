@@ -1,6 +1,16 @@
 #include <gsl/gsl_sf_fermi_dirac.h>
+#include <signal.h>
 
 #include "sim.h"
+
+bool running = true; // simulator running?
+
+void ihandler(int sn)
+{
+	if (sn == SIGINT) {
+		running = false;
+	}
+}
 
 // load integer from string s with variable name of v
 #define loadi(v) \
@@ -18,11 +28,11 @@
 		continue; \
 	}
 
-Sim::Sim(string inpath, string outpath) :
-	infile(inpath), outfile(outpath)
+Sim::Sim(string ipath, string opath) :
+	infile(ipath), outpath(opath)
 {
-	if (!infile.is_open() || !outfile.is_open()) {
-		cout << "Can't open in / out files!" << endl;
+	if (!infile.is_open()) { 
+		cout << "Can't open infile!" << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -35,6 +45,7 @@ Sim::Sim(string inpath, string outpath) :
 		}
 
 		loadi(N);
+		loadi(rtWrite);
 		loadd(C);
 		loadd(w);
 		loadd(rho0);
@@ -63,10 +74,27 @@ Sim::Sim(string inpath, string outpath) :
 	rhoi.resize(N);
 	f.resize(N);
 
+	signal(SIGINT, ihandler);
+
 	cout << "N: " << N << ", C: " << C << ", w: " << w << ", rho0: " << rho0 << ", T: " << T << endl;
 	cout << "tB: " << tB << ", tOx: " << tOx << ", VG: " << VG << endl;
 	cout << "NA: " << NA << ", EgSi: " << EgSi << ", EgOx: " << EgOx << ", epsSi: " << epsSi << ", epsOx: " << epsOx << endl;
 	cout << "meSi: " << meSi << ", mhSi: " << mhSi << endl;
+}
+
+void Sim::write()
+{
+	outfile.open(outpath, ios::out | ios::trunc);
+	if (!outfile.is_open()) { 
+		cout << "Can't open outfile!" << endl;
+		exit(EXIT_FAILURE);
+	}
+	for (int i = 0; i < N; ++i) { // write to file
+		double z = getZ(i);
+		// z position, rho(z), phi(z), n(z), p(z)
+		outfile << z << " " << rho[i] << " " << psolver.eval(z) << " " << n(z) << " " << p(z) << endl;
+	}
+	outfile.close();
 }
 
 #define DIVCRIT 1.e6 // criterion to stop when diverging
@@ -83,8 +111,6 @@ int Sim::run()
 	psolver.setBounds(0., tB + tOx);
 	psolver.setBC(0., VG);
 
-	psolver.setRHS(&f[0]); // b = f
-
 	cout << endl;
 	cout << "Starting to solve..." << endl;
 
@@ -92,12 +118,13 @@ int Sim::run()
 		for (int i = 0; i < N; ++i) { // calculate RHS
 			f[i] = -rho[i] / getEps(getZ(i));
 		}
+		psolver.setRHS(&f[0]); // b = f
 
 		psolver.solve(); // solve Poisson equation
 
 		bool converged = true;
 		double residual = 0., progress = 1.;
-
+		
 		for (int i = 0; i < N; ++i) { // calculate new rho(z)
 			rhoi[i] = rho[i];
 
@@ -111,7 +138,7 @@ int Sim::run()
 			if (rhoNew == 0.)
 				continue;
 
-			double res = abs(rho[i] - rhoi[i]) / abs(rho[i]); // residual for element
+			double res = abs(rhoNew - rhoi[i]) / abs(rhoNew); // residual for element
 
 			if (res > C) // convergence not reached?
 				converged = false;
@@ -122,7 +149,7 @@ int Sim::run()
 			residual += res;
 		}
 		residual /= (double) N;
-
+		
 		cout << "iteration: " << ticks << ", residual: " << residual << " (" << progress << ")" << endl;
 
 		++ticks;
@@ -158,13 +185,12 @@ int Sim::run()
 
 		if (converged)
 			running = false;
+
+		if (rtWrite)
+			write();
 	}
 
-	for (int i = 0; i < N; ++i) { // write to file
-		double z = getZ(i);
-		// z position, rho(z), phi(z), n(z), p(z)
-		outfile << z << " " << rho[i] << " " << psolver.eval(z) << " " << n(z) << " " << p(z) << endl;
-	}
+	write();
 
 	psolver.destroy();
 
@@ -198,7 +224,7 @@ double Sim::getEg(double z)
 {
 	if (z <= tB) // in silicon?
 		return EgSi;
-	else if (z >= tOx + tB) // in oxide?
+	else if (z <= tOx + tB) // in oxide?
 		return EgOx;
 
 	return 0.;
@@ -208,7 +234,7 @@ double Sim::getEps(double z)
 {
 	if (z <= tB) // in silicon?
 		return epsSi * CONST.eps0;
-	else if (z >= tOx + tB) // in oxide?
+	else if (z <= tOx + tB) // in oxide?
 		return epsOx * CONST.eps0;
 
 	return CONST.eps0;
@@ -221,15 +247,10 @@ double Sim::n(double z)
 
 	double b = -Ec(z) / CONST.kB / T; // EF = 0
 
-	if (abs(b) > 40.) { // exponent too extreme
-		cout << "FD fail!" << endl;
-		return 0.;
-	}
+	// 1 / gamma(3/2) * F
+	double I = 2. / sqrt(M_PI) * gsl_sf_fermi_dirac_half(b); // if b is too extreme, we get abort
 
-	// gamma(3/2) * F
-	double I = sqrt(M_PI) / 2. * gsl_sf_fermi_dirac_half(b); // if b is too extreme, we get abort
-
-	return sqrt(2. * CONST.kB * T) * pow(getMe(z), 3. / 2.) /
+	return sqrt(2.) / sqrt(CONST.kB * T) * pow(getMe(z), 3. / 2.) /
 		(M_PI * M_PI * CONST.hbar * CONST.hbar * CONST.hbar) * I;
 }
 
@@ -240,14 +261,9 @@ double Sim::p(double z)
 
 	double b = Ev(z) / CONST.kB / T;
 
-	if (abs(b) > 40.) {
-		cout << "FD fail!" << endl;
-		return 0.;
-	}
+	double I = 2. / sqrt(M_PI) * gsl_sf_fermi_dirac_half(b);
 
-	double I = sqrt(M_PI) / 2. * gsl_sf_fermi_dirac_half(b);
-
-	return sqrt(2.) * pow(getMh(z), 3. / 2.) /
+	return sqrt(2.) / sqrt(CONST.kB * T) * pow(getMh(z), 3. / 2.) /
 		(M_PI * M_PI * CONST.hbar * CONST.hbar * CONST.hbar) * I;
 }
 

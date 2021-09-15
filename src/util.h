@@ -27,6 +27,12 @@ public:
 		for (int i = 0; i < r * c; ++i)
 			m[i] = 0.;
 	}
+	
+	void smul(double v) // scale all elements by v
+	{
+		for (int i = 0; i < r * c; ++i)
+			m[i] *= v;
+	}
 
 	double &first() // get ref to first element
 	{

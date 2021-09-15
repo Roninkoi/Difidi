@@ -1,4 +1,4 @@
-#include <lapacke/lapack.h>
+#include <lapacke.h>
 
 #include "solver.h"
 
@@ -7,12 +7,14 @@ void PoissonSolver::create(int N)
 	this->N = N;
 	this->M = N - 2;
 	A.create(this->M, this->M);
+	bx.create(this->M, 1);
 	pivot = (int *) malloc(sizeof(int) * this->M);
 }
 
 void PoissonSolver::destroy()
 {
 	A.destroy();
+	bx.destroy();
 	free(pivot);
 }
 
@@ -34,11 +36,16 @@ void PoissonSolver::construct()
 void PoissonSolver::solve()
 {
 	construct(); // construct matrix A
-
+	
 	bx.first() -= phia / h / h; // Neumann boundary conditions
 	bx.last() -= phib / h / h;
 
 	int info, n1 = M, n2 = 1;
+
+	/*cout << "A = " << endl;
+	A.print();
+	cout << "B = " << endl;
+	bx.print();*/
 
 	// solve A x = b using LAPACK, result goes into bx
 	// matrix A is symmetric, so no need to transpose
