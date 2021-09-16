@@ -35,6 +35,7 @@ private:
 	double tB = 1.; // thicknesses
 	double tOx = 1.;
 	double VG = 1.; // gate voltage
+	double Vmax = 1.; // maximum voltage when stepping
 	double Vstep = 0.; // voltage step for VI calculation, enabled if > 0
 
 	double NA = 1.; // doping concentration

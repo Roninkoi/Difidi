@@ -1,8 +1,8 @@
 # 2. charge density and potential distributions for 0.5 micron bulk
 
-N 1000 # number of elements
+N 100 # number of elements
 C 1.e-2 # convergence criterion
-w 1.e-12 # damping factor
+w 0.1 # damping factor
 rho0 0. # initial guess for density (e / nm^3)
 T 300. # temperature (K)
 

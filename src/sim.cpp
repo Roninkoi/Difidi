@@ -54,6 +54,7 @@ Sim::Sim(string ipath, string opath) :
 		loadd(tB);
 		loadd(tOx);
 		loadd(VG);
+		loadd(Vmax);
 		loadd(Vstep);
 
 		loadd(NA);
@@ -123,7 +124,7 @@ int Sim::run()
 		psolver.solve(); // solve Poisson equation
 
 		bool converged = true;
-		double residual = 0., progress = 1.;
+		double residual = 0., sresidual = 0., progress = 1.;
 		
 		for (int i = 0; i < N; ++i) { // calculate new rho(z)
 			rhoi[i] = rho[i];
@@ -139,17 +140,18 @@ int Sim::run()
 				continue;
 
 			double res = abs(rhoNew - rhoi[i]) / abs(rhoNew); // residual for element
+			//double res = abs(rho[i] - rhoi[i]) / abs(rho[i]);
 
 			if (res > C) // convergence not reached?
-				converged = false;
-
+			  converged = false;
+		
 			if (C / res < progress)
 				progress = C / res;
 
 			residual += res;
 		}
 		residual /= (double) N;
-		
+
 		cout << "iteration: " << ticks << ", residual: " << residual << " (" << progress << ")" << endl;
 
 		++ticks;
@@ -172,7 +174,7 @@ int Sim::run()
 					break;
 				}
 			}
-			if (nlarger) {
+			if (nlarger || VG >= Vmax) {
 				cout << "VI: " << VG << endl;
 			}
 			else {
@@ -240,6 +242,8 @@ double Sim::getEps(double z)
 	return CONST.eps0;
 }
 
+#define MAXB 40.
+
 double Sim::n(double z)
 {
 	if (z > tB) // insulator
@@ -247,10 +251,13 @@ double Sim::n(double z)
 
 	double b = -Ec(z) / CONST.kB / T; // EF = 0
 
-	// 1 / gamma(3/2) * F
-	double I = 2. / sqrt(M_PI) * gsl_sf_fermi_dirac_half(b); // if b is too extreme, we get abort
+	if (abs(b) > MAXB)
+		return 0.;
 
-	return sqrt(2.) / sqrt(CONST.kB * T) * pow(getMe(z), 3. / 2.) /
+	// gamma(3/2) * F
+	double I = sqrt(M_PI) / 2. * gsl_sf_fermi_dirac_half(b); // if b is too extreme, we get abort
+
+	return sqrt(2.) * pow(getMe(z) * CONST.kB * T, 3. / 2.) /
 		(M_PI * M_PI * CONST.hbar * CONST.hbar * CONST.hbar) * I;
 }
 
@@ -261,9 +268,12 @@ double Sim::p(double z)
 
 	double b = Ev(z) / CONST.kB / T;
 
-	double I = 2. / sqrt(M_PI) * gsl_sf_fermi_dirac_half(b);
+	if (abs(b) > MAXB)
+		return 0.;
+	
+	double I = sqrt(M_PI) / 2. * gsl_sf_fermi_dirac_half(b);
 
-	return sqrt(2.) / sqrt(CONST.kB * T) * pow(getMh(z), 3. / 2.) /
+	return sqrt(2.) * pow(getMh(z) * CONST.kB * T, 3. / 2.) /
 		(M_PI * M_PI * CONST.hbar * CONST.hbar * CONST.hbar) * I;
 }
 
