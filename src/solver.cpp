@@ -42,11 +42,6 @@ void PoissonSolver::solve()
 
 	int info, n1 = M, n2 = 1;
 
-	/*cout << "A = " << endl;
-	A.print();
-	cout << "B = " << endl;
-	bx.print();*/
-
 	// solve A x = b using LAPACK, result goes into bx
 	// matrix A is symmetric, so no need to transpose
 	dgesv_(&n1, &n2, A.m, &n1, pivot, bx.m, &n1, &info);

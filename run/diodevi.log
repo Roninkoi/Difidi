@@ -1,5 +1,5 @@
 Diode finite differences, Roni Koitermaa 2021
-Thu Sep 16 18:57:39 2021
+Thu Sep 16 19:20:25 2021
 
 infile: run/diodevi.in, outfile: run/diodevi.out
 N: 100, C: 0.01, w: 0.001, rho0: 0, T: 300
