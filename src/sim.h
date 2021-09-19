@@ -48,6 +48,8 @@ private:
 
 	double meSi = 1.; // effective masses
 	double mhSi = 1.;
+	double meOx = 1.;
+	double mhOx = 1.;
 
 	vector<double> rho; // current iteration density
 	vector<double> rhoi; // previous iteration density

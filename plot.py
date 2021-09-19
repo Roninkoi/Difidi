@@ -43,8 +43,11 @@ data1 = np.array([data[:, 0], data[:, 1]]).T
 data2 = np.array([data[:, 0], data[:, 2]]).T
 data3 = np.array([data[:, 0], data[:, 3]]).T
 data4 = np.array([data[:, 0], data[:, 4]]).T
+data5 = np.array([data[:, 0], data[:, 5]]).T
+data6 = np.array([data[:, 0], data[:, 6]]).T
 
 linescatter([data1], ["Charge density", "$z$ (nm)", r"$\rho$ (nm$^{-3}$)"], fpath="rho.pdf")
 linescatter([data2], ["Potential", "$z$ (nm)", r"$\phi$ (V)"], fpath="phi.pdf")
 linescatter([data3, data4], ["Charge carrier concentration", "$z$ (nm)", "$n$ (nm$^{-3}$)"], ["$n$", "$p$"], fpath="np.pdf")
+linescatter([data5, data6], ["Energy band diagram", "$z$ (nm)", "$E$ (eV)"], ["$E_v$", "$E_c$"], fpath="eband.pdf")
 

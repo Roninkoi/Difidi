@@ -7,7 +7,7 @@ rho0 0.0 # initial guess for density (e / nm^3)
 T 300. # temperature (K)
 
 tOx 50. # thickness of oxide (nm)
-tB 2.e3 # thickness of Si (nm)
+tB 1.e3 # thickness of Si (nm)
 VG 0.8 # gate voltage (V)
 
 NA 1.e-5 # doping concentration (nm^-3)

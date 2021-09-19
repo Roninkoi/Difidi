@@ -92,8 +92,8 @@ void Sim::write()
 	}
 	for (int i = 0; i < N; ++i) { // write to file
 		double z = getZ(i);
-		// z position, rho(z), phi(z), n(z), p(z)
-		outfile << z << " " << rho[i] << " " << psolver.eval(z) << " " << n(z) << " " << p(z) << endl;
+		// z position, rho(z), phi(z), n(z), p(z), Ev(z), Ec(z)
+		outfile << z << " " << rho[i] << " " << psolver.eval(z) << " " << n(z) << " " << p(z) << " " << Ev(z) << " " << Ec(z) << endl;
 	}
 	outfile.close();
 }
@@ -209,6 +209,8 @@ double Sim::getMe(double z)
 	if (z <= tB) { // in silicon?
 		return meSi * CONST.me0;
 	}
+	else if (z <= tOx + tB) // in oxide?
+		return mhOx * CONST.me0;
 
 	return CONST.me0;
 }
@@ -218,6 +220,8 @@ double Sim::getMh(double z)
 	if (z <= tB) { // in silicon?
 		return mhSi * CONST.me0;
 	}
+	else if (z <= tOx + tB) // in oxide?
+		return mhOx * CONST.me0;
 
 	return CONST.me0;
 }
