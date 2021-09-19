@@ -67,6 +67,8 @@ Sim::Sim(string ipath, string opath) :
 
 		loadd(meSi);
 		loadd(mhSi);
+		loadd(meOx);
+		loadd(mhOx);
 	}
 
 	psolver.create(N);
@@ -210,7 +212,7 @@ double Sim::getMe(double z)
 		return meSi * CONST.me0;
 	}
 	else if (z <= tOx + tB) // in oxide?
-		return mhOx * CONST.me0;
+		return meOx * CONST.me0;
 
 	return CONST.me0;
 }
