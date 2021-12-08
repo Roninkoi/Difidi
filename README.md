@@ -1,6 +1,6 @@
 # Difidi - diode finite differences
 
-Solves the Poisson equation using the finite difference method and computes Fermi-Dirac integrals to determine the charge density distribution rho(z). A self-consistent solution is found by an iterative algorithm using damping.
+Solves the Poisson equation using the finite difference method and computes Fermi-Dirac integrals to determine the charge density distribution rho(z). A solution satisfying all equations is found by an iterative algorithm using damping.
 
 Compilation:
 ```
