@@ -52,3 +52,8 @@ Plotting:
 
 This produces plots for potential, charge distribution, charge carrier distributions and the band diagram.
 
+Solver residual can be monitored in real time using:
+```
+gnuplot residual.gp
+```
+
