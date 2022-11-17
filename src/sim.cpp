@@ -4,28 +4,38 @@
 #include "sim.h"
 
 bool running = true; // simulator running?
+int returncode = 0;
 
 void ihandler(int sn)
 {
 	if (sn == SIGINT) {
 		running = false;
+		returncode = 1;
 	}
 }
 
 // load integer from string s with variable name of v
-#define loadi(v) \
+#define loadi(v)			  \
 	if (s.compare(#v) == 0) { \
-		infile >> s; \
-		v = stoi(s); \
-		continue; \
+		infile >> s;	  \
+		v = stoi(s);	  \
+		continue;		  \
 	}
 
 // load double from string s with variable name of v
-#define loadd(v) \
-	if (s.compare(#v) == 0) { \
-		infile >> s; \
-		v = stod(s); \
-		continue; \
+#define loadd(v)										\
+	if (s.compare(#v) == 0) {							\
+		infile >> s;								\
+		v = stod(s);								\
+		continue;									\
+	}
+
+// load string s with variable name of v
+#define loads(v)						\
+	if (s.compare(#v) == 0) {			\
+		infile >> s;				\
+		v = s;					\
+		continue;					\
 	}
 
 Sim::Sim(string ipath, string opath) :
@@ -49,6 +59,8 @@ Sim::Sim(string ipath, string opath) :
 		loadd(C);
 		loadd(w);
 		loadd(rho0);
+		loads(rhopath);
+		
 		loadd(T);
 
 		loadd(tB);
@@ -109,6 +121,17 @@ int Sim::run()
 
 	for (auto &r : rhoi)
 		r = rho0;
+	
+	rhofile.open(rhopath);
+	if (rhofile.good()) {
+		for (int i = 0; i < N; ++i) {
+			double z0, rho0, sol0, n0, p0, Ev0, Ec0;
+			rhofile >> z0 >> rho0 >> sol0 >> n0 >> p0 >> Ev0 >> Ec0;
+			rho[i] = rho0;
+			rhoi[i] = rho0;
+		}
+	}
+	rhofile.close();
 
 	// set up Poisson solver
 	psolver.setBounds(0., tB + tOx);
@@ -198,7 +221,7 @@ int Sim::run()
 
 	psolver.destroy();
 
-	return 0;
+	return returncode;
 }
 
 double Sim::getZ(int i)

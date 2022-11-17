@@ -23,6 +23,9 @@ private:
 	ofstream outfile;
 	string outpath;
 
+	ifstream rhofile;
+	string rhopath;
+
 	int ticks = 0; // simulator cycle
 	bool rtWrite = false; // write to file in real time?
 
