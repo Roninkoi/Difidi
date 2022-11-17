@@ -14,11 +14,11 @@ $$
 using the finite difference method and computes Fermi-Dirac integrals
 
 $$
-n(z) = \frac{\sqrt{2} m_e^{3/2}}{\pi^2 \hbar^3} \int_{E_c(z)}^\infty \frac{\sqrt{E - E_c(z)}}{1 + \exp(E / k_B T)} \ \text{D} E
+n(z) = \frac{\sqrt{2} m_e^{3/2}}{\pi^2 \hbar^3} \int_{E_c(z)}^\infty \frac{\sqrt{E - E_c(z)}}{1 + \exp(E / k_B T)} \ \text{d} E,
 $$
 
 $$
-p(z) = \frac{\sqrt{2} m_e^{3/2}}{\pi^2 \hbar^3} \int_{-\infty}^{E_v(z)} \frac{\sqrt{E_v(z) - E}}{1 + \exp(E / k_B T)} \ \text{D} E
+p(z) = \frac{\sqrt{2} m_e^{3/2}}{\pi^2 \hbar^3} \int_{-\infty}^{E_v(z)} \frac{\sqrt{E_v(z) - E}}{1 + \exp(E / k_B T)} \ \text{d} E,
 $$
 
 to determine the charge density distribution $\rho(z) = e (-N_A - n(z) + p(z))$. A solution satisfying all equations is found by an iterative algorithm using damping.
