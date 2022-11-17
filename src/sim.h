@@ -19,6 +19,8 @@ public:
 	int run(); // main loop of simulation
 	
 private:
+	bool running; // simulator running?
+	
 	ifstream infile; // in / out files
 	ofstream outfile;
 	string outpath;

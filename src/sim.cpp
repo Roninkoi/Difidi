@@ -3,31 +3,29 @@
 
 #include "sim.h"
 
-bool running = true; // simulator running?
-int returncode = 0;
+int signalCode = 0; // caught signal
 
-void ihandler(int sn)
+void signalHandler(int sn)
 {
 	if (sn == SIGINT) {
-		running = false;
-		returncode = 1;
+		signalCode = sn;
 	}
 }
 
 // load integer from string s with variable name of v
-#define loadi(v)			  \
-	if (s.compare(#v) == 0) { \
-		infile >> s;	  \
-		v = stoi(s);	  \
-		continue;		  \
+#define loadi(v)						\
+	if (s.compare(#v) == 0) {			\
+		infile >> s;				\
+		v = stoi(s);				\
+		continue;					\
 	}
 
 // load double from string s with variable name of v
-#define loadd(v)										\
-	if (s.compare(#v) == 0) {							\
-		infile >> s;								\
-		v = stod(s);								\
-		continue;									\
+#define loadd(v)						\
+	if (s.compare(#v) == 0) {			\
+		infile >> s;				\
+		v = stod(s);				\
+		continue;					\
 	}
 
 // load string s with variable name of v
@@ -41,6 +39,8 @@ void ihandler(int sn)
 Sim::Sim(string ipath, string opath) :
 	infile(ipath), outpath(opath)
 {
+	running = true;
+	
 	if (!infile.is_open()) { 
 		cout << "Can't open infile!" << endl;
 		exit(EXIT_FAILURE);
@@ -89,7 +89,7 @@ Sim::Sim(string ipath, string opath) :
 	rhoi.resize(N);
 	f.resize(N);
 
-	signal(SIGINT, ihandler);
+	signal(SIGINT, signalHandler);
 
 	cout << "N: " << N << ", C: " << C << ", w: " << w << ", rho0: " << rho0 << ", T: " << T << endl;
 	cout << "tB: " << tB << ", tOx: " << tOx << ", VG: " << VG << endl;
@@ -116,6 +116,8 @@ void Sim::write()
 
 int Sim::run()
 {
+	int result = 0;
+	
 	for (auto &r : rho) // initial guess
 		r = rho0;
 
@@ -174,6 +176,12 @@ int Sim::run()
 				progress = C / res;
 
 			residual += res;
+
+			if (signalCode) {
+				result = 1;
+				running = false;
+				break;
+			}
 		}
 		residual /= (double) N;
 
@@ -221,7 +229,7 @@ int Sim::run()
 
 	psolver.destroy();
 
-	return returncode;
+	return result;
 }
 
 double Sim::getZ(int i)
